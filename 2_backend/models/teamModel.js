@@ -10,7 +10,12 @@ const teamSchema = new Schema({
     type: String,
     required: true,
   },
-  rating: {
+
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
     type: String,
     required: true,
   },

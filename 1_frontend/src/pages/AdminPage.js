@@ -5,7 +5,7 @@ import Button from '../components/Button';
 const AdminPage = () => {
   //Hooks
   //--local state
-
+  const [count, setCount] = useState(1);
   const [teams, setTeams] = useState([]);
   const [votes, setVotes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,21 +21,21 @@ const AdminPage = () => {
       setVotes(response.data);
     });
   }, [isLoading]);
-  let liked = useRef(false);
+
   //Custom functions
-  const increment = () => {
-    if (!liked.current) {
-      const [newArray] = votes.map((item) => item.vote);
-      liked.current = true;
-      console.log(newArray);
+
+  let rated = useRef(false);
+
+  const decrement = (id) => {
+    if (!rated.current) {
+      setCount(count - 1);
+      rated.current = true;
 
       //fetching (using axios ar fetch ) data from API withPOST/PUT method
     }
     return;
   };
-  const decrement = () => {
-    console.log(votes.map((ti) => ti.vote) + 1);
-  };
+
   return (
     <div>
       <h2>Admin</h2>
@@ -47,12 +47,9 @@ const AdminPage = () => {
           <div key={item._id}>
             <h2>{item.name}</h2>
             <h3>{item.location}</h3>
-            <h4>{item.rating}</h4>
-            {item.vote.map((it) => (
-              <h4> Score: {it.vote}</h4>
-            ))}
-            <Button text='-' action={decrement} />
-            <Button text='+' action={increment} />
+            <h4>Score: {count}</h4>
+            <Button text='-' action={() => decrement(item._id)} />
+            <Button text='+' />
           </div>
         ))
       )}

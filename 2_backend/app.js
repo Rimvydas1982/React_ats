@@ -53,3 +53,57 @@ app.get('/api/teamsvotes', async (req, res) => {
 
   res.json(teamsAndvotes);
 });
+
+app.post('/api/users/login', (req, res) => {
+  let user = req.body;
+
+  Team.find().then((result) => {
+    let userFounded = result.find(
+      (userFromDB) =>
+        userFromDB.email === user.email && userFromDB.password === user.password
+    );
+
+    if (userFounded) {
+      let { _id } = userFounded;
+
+      res.json({
+        loginStatus: 'success',
+        userId: _id,
+      });
+    } else {
+      res.status(401).json({
+        loginStatus: 'failed',
+        message: 'Given email or password is incorrect',
+      });
+    }
+  });
+});
+// POST: register new user
+app.post('/api/users/signup', (req, res) => {
+  let user = req.body;
+
+  Team.find().then((result) => {
+    const userExists = result.some(
+      (userFromDB) => userFromDB.email === user.email
+    );
+
+    if (userExists) {
+      res.json({
+        registrationStatus: 'failed',
+        message: 'User with given email already exists',
+      });
+    } else {
+      user.cars = [];
+
+      const newUser = new Team(user);
+
+      newUser.save().then((result) => {
+        let { _id } = result;
+        res.json({
+          registrationStatus: 'success',
+          userId: _id,
+        });
+      });
+    }
+  });
+});
