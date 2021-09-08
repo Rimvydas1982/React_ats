@@ -1,14 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import { UserContext } from './../App';
 import Button from '../components/Button';
 
 const AdminPage = () => {
   //Hooks
+  //--global
+  const { dispatch } = useContext(UserContext);
   //--local state
   const [count, setCount] = useState(1);
   const [teams, setTeams] = useState([]);
   const [votes, setVotes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  //--redirecting
+  const history = useHistory();
   //side effects
   useEffect(() => {
     if (isLoading) {
@@ -35,11 +42,27 @@ const AdminPage = () => {
     }
     return;
   };
+  const increment = (id) => {
+    if (!rated.current) {
+      setCount(count + 1);
+      rated.current = true;
+
+      //fetching (using axios ar fetch ) data from API withPOST/PUT method
+    }
+    return;
+  };
+
+  const logOutUser = () => {
+    dispatch({ type: 'LOGOUT', user: '' });
+    localStorage.removeItem('user');
+    history.push('/');
+  };
 
   return (
     <div>
       <h2>Admin</h2>
       <h5>All teams</h5>
+      <Button text='LOGOUT' action={logOutUser} />
       {isLoading ? (
         <div>Loading...</div>
       ) : (
@@ -49,7 +72,7 @@ const AdminPage = () => {
             <h3>{item.location}</h3>
             <h4>Score: {count}</h4>
             <Button text='-' action={() => decrement(item._id)} />
-            <Button text='+' />
+            <Button text='+' action={() => increment(item._id)} />
           </div>
         ))
       )}
