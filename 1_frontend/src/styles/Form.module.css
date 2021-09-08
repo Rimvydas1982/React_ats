@@ -1,0 +1,109 @@
+/* Variables */
+:root {
+  /* colors */
+  --primary-color: rgba(255, 115, 0, 0.719);
+  --secondary-color: lightblue;
+
+  --text-dark-color: black;
+  --text-light-color: white;
+}
+.container {
+  max-width: 1024px;
+
+  margin: 0 auto;
+  padding: 0 15px;
+}
+.headline {
+  margin: 40px 20px;
+  text-align: center;
+  font-size: 1.7em;
+  color: firebrick;
+}
+
+.login {
+  padding: 30px;
+}
+
+.signup {
+  padding: 30px;
+  margin-top: 35px;
+}
+
+.container section h2 span {
+  font-weight: 400;
+}
+
+/* components */
+/* -- form */
+.form {
+  margin-top: 10px;
+}
+
+.formControl {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.formLabel {
+  font-size: 1.2em;
+}
+
+.formInput {
+  margin-bottom: 15px;
+  padding: 5px 7px;
+  font-size: 1em;
+
+  color: #555;
+}
+
+.formMessageSuccess {
+  margin-top: 15px;
+  padding: 5px 10px;
+  border-radius: 3px 0px 0px 3px;
+  background-color: #f8f8f8;
+  border-left: 5px solid green;
+}
+
+.formMessageDanger {
+  margin-top: 15px;
+  padding: 5px 10px;
+  border-radius: 3px 0px 0px 3px;
+  background-color: #f8f8f8;
+}
+
+.btnSubmit {
+  display: inline-block;
+  border: 0;
+  padding: 5px 10px;
+  border-radius: 3px;
+
+  font-size: 1em;
+  text-decoration: none;
+  background-color: var(--primary-color);
+  color: var(--text-light-color);
+
+  cursor: pointer;
+  width: fit-content;
+  color: #fff;
+}
+
+/* Desktop */
+@media screen and (min-width: 1024px) {
+  /* -- main */
+  /* login.html */
+  .loginSignupContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .loginSignupContainerLogin,
+  .loginSignupContainerSignup {
+    width: calc(100% / 2 - 30px);
+  }
+
+  .loginSignupContainerSignup {
+    margin-top: 0;
+  }
+}

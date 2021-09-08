@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../App';
+import style from '../styles/Header.module.css';
 
 const Header = () => {
   //Hooks
@@ -20,21 +21,23 @@ const Header = () => {
     }
   }, [dispatch]);
   return (
-    <header>
-      <div>Dashboard</div>
-      <nav>
-        <ul>
-          {state.user ? (
-            <li>
-              <Link to='/admin'>Admin Page</Link>
-            </li>
-          ) : (
-            <li>
-              <Link to='/'>Login page</Link>
-            </li>
-          )}
-        </ul>
-      </nav>
+    <header className={style.header}>
+      <div className={style.container}>
+        <div>Dashboard</div>
+        <nav>
+          <ul>
+            {state.user ? (
+              <li>
+                <Link to='/admin'>Admin Page</Link>
+              </li>
+            ) : (
+              <li>
+                <Link to='/'>Login page</Link>
+              </li>
+            )}
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 };

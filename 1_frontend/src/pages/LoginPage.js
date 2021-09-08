@@ -2,6 +2,8 @@ import React, { useState, useContext, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from './../App';
+import buttonStyle from '../styles/Button.module.css';
+import formstyle from '../styles/Form.module.css';
 
 const LoginPage = () => {
   //Hooks
@@ -34,7 +36,7 @@ const LoginPage = () => {
     e.preventDefault();
 
     axios
-      .post('http://localhost:5000/api/users/login', {
+      .post('http://localhost:5000/api/teams/login', {
         email: loginEmail,
         password: loginPassword,
       })
@@ -70,7 +72,7 @@ const LoginPage = () => {
       return;
     }
     axios
-      .post('http://localhost:5000/api/users/signup', {
+      .post('http://localhost:5000/api/teams/signup', {
         name: signupName,
         location: signupLocation,
         email: signupEmail,
@@ -94,21 +96,30 @@ const LoginPage = () => {
 
   return (
     <main>
-      <div>
+      <div className={formstyle.container}>
         <section>
-          <h1>Welcome to Lithuania Teams Dashbord</h1>
+          <h1 className={formstyle.headline}>
+            Welcome to Lithuanian Football Teams Dashbord
+          </h1>
         </section>
 
-        <div className='login-signup-container'>
-          <section id='login'>
+        <div className={formstyle.loginSignupContainer}>
+          <section id='login' className={formstyle.login}>
             <h2>
-              <span>Have you team already?</span> Log In!
+              <span>Have you team already?</span>
             </h2>
 
-            <form id='logInForm' onSubmit={loginUser}>
-              <div>
-                <label htmlFor='loginEmail'>Email</label>
+            <form
+              id='logInForm'
+              className={formstyle.form}
+              onSubmit={loginUser}
+            >
+              <div className={formstyle.formControl}>
+                <label className={formstyle.formLabel} htmlFor='loginEmail'>
+                  Email
+                </label>
                 <input
+                  className={formstyle.formInput}
                   type='email'
                   value={loginEmail}
                   onChange={(e) => setLoginEmail(e.target.value)}
@@ -117,9 +128,12 @@ const LoginPage = () => {
                 />
               </div>
 
-              <div>
-                <label htmlFor='loginPassword'>Password</label>
+              <div className={formstyle.formControl}>
+                <label className={formstyle.formLabel} htmlFor='loginPassword'>
+                  Password
+                </label>
                 <input
+                  className={formstyle.formInput}
                   type='password'
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
@@ -128,20 +142,29 @@ const LoginPage = () => {
               </div>
 
               <div>
-                <input type='submit' value='Log In' />
+                <input
+                  className={buttonStyle.button}
+                  type='submit'
+                  value='Log In'
+                />
               </div>
             </form>
-            <p id='loginMessage'>{loginErrorMessage}</p>
+            <p id='loginMessage' className={formstyle.formMessageDanger}>
+              {loginErrorMessage}
+            </p>
           </section>
-          <section id='signup'>
+          <section id='signup' className={formstyle.signup}>
             <h2>
               <span>Create New Team</span>
             </h2>
 
-            <form className='form' onSubmit={signupUser}>
-              <div>
-                <label htmlFor='signUpName'>Name</label>
+            <form className={formstyle.form} onSubmit={signupUser}>
+              <div className={formstyle.formControl}>
+                <label className={formstyle.formLabel} htmlFor='signUpName'>
+                  Team name
+                </label>
                 <input
+                  className={formstyle.formInput}
                   type='text'
                   required
                   value={signupName}
@@ -149,9 +172,12 @@ const LoginPage = () => {
                 />
               </div>
 
-              <div>
-                <label htmlFor='signUpLocation'>Location</label>
+              <div className={formstyle.formControl}>
+                <label className={formstyle.formLabel} htmlFor='signUpLocation'>
+                  Team Home Location
+                </label>
                 <input
+                  className={formstyle.formInput}
                   type='text'
                   required
                   value={signupLocation}
@@ -159,9 +185,12 @@ const LoginPage = () => {
                 />
               </div>
 
-              <div>
-                <label htmlFor='signUpEmail'>Email</label>
+              <div className={formstyle.formControl}>
+                <label className={formstyle.formLabel} htmlFor='signUpEmail'>
+                  Email
+                </label>
                 <input
+                  className={formstyle.formInput}
                   type='text'
                   required
                   value={signupEmail}
@@ -170,9 +199,12 @@ const LoginPage = () => {
                 />
               </div>
 
-              <div>
-                <label htmlFor='signUpPassword'>Password</label>
+              <div className={formstyle.formControl}>
+                <label className={formstyle.formLabel} htmlFor='signUpPassword'>
+                  Password
+                </label>
                 <input
+                  className={formstyle.formInput}
                   type='password'
                   required
                   value={signupPassword}
@@ -181,9 +213,15 @@ const LoginPage = () => {
                 />
               </div>
 
-              <div>
-                <label htmlFor='signUpConfirmPassword'>Confirm Password</label>
+              <div className={formstyle.formControl}>
+                <label
+                  className={formstyle.formLabel}
+                  htmlFor='signUpConfirmPassword'
+                >
+                  Confirm Password
+                </label>
                 <input
+                  className={formstyle.formInput}
                   type='password'
                   required
                   value={signupConfirmPassword}
@@ -192,10 +230,16 @@ const LoginPage = () => {
               </div>
 
               <div>
-                <input type='submit' value='Sign Up' />
+                <input
+                  className={buttonStyle.button}
+                  type='submit'
+                  value='Create New Team'
+                />
               </div>
             </form>
-            <p id='signUpMessage'>{signupErrorMessage}</p>
+            <p id='signUpMessage' className={formstyle.formMessageDanger}>
+              {signupErrorMessage}
+            </p>
           </section>
         </div>
       </div>

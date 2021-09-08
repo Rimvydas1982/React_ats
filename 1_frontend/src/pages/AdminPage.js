@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from './../App';
 import Button from '../components/Button';
+import style from '../styles/AdminPage.module.css';
 
 const AdminPage = () => {
   //Hooks
@@ -59,24 +60,26 @@ const AdminPage = () => {
   };
 
   return (
-    <div>
-      <h2>Admin</h2>
-      <h5>All teams</h5>
+    <main className={style.main}>
       <Button text='LOGOUT' action={logOutUser} />
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        teams.map((item) => (
-          <div key={item._id}>
-            <h2>{item.name}</h2>
-            <h3>{item.location}</h3>
-            <h4>Score: {count}</h4>
-            <Button text='-' action={() => decrement(item._id)} />
-            <Button text='+' action={() => increment(item._id)} />
-          </div>
-        ))
-      )}
-    </div>
+      <h2>All teams</h2>
+
+      <section className={style.section}>
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          teams.map((item) => (
+            <div key={item._id}>
+              <h2>{item.name}</h2>
+              <h3>{item.location}</h3>
+              <h4>Score: {count}</h4>
+              <Button text='-' action={() => decrement(item._id)} />
+              <Button text='+' action={() => increment(item._id)} />
+            </div>
+          ))
+        )}
+      </section>
+    </main>
   );
 };
 

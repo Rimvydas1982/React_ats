@@ -53,8 +53,8 @@ app.get('/api/teamsvotes', async (req, res) => {
 
   res.json(teamsAndvotes);
 });
-
-app.post('/api/users/login', (req, res) => {
+// Login team
+app.post('/api/teams/login', (req, res) => {
   let user = req.body;
 
   Team.find().then((result) => {
@@ -78,8 +78,8 @@ app.post('/api/users/login', (req, res) => {
     }
   });
 });
-// POST: register new user
-app.post('/api/users/signup', (req, res) => {
+// Signup tem
+app.post('/api/teams/signup', (req, res) => {
   let user = req.body;
 
   Team.find().then((result) => {
