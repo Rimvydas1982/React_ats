@@ -78,7 +78,7 @@ app.post('/api/teams/login', (req, res) => {
     }
   });
 });
-// Signup tem
+// Signup team
 app.post('/api/teams/signup', (req, res) => {
   let user = req.body;
 

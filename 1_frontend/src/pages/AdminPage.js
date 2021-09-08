@@ -27,6 +27,7 @@ const AdminPage = () => {
     }
     axios.get('http://localhost:5000/api/votes').then((response) => {
       setVotes(response.data);
+      console.log(response.data);
     });
   }, [isLoading]);
 
@@ -34,21 +35,17 @@ const AdminPage = () => {
 
   let rated = useRef(false);
 
-  const decrement = (id) => {
+  const decrement = (e, id) => {
     if (!rated.current) {
       setCount(count - 1);
       rated.current = true;
-
-      //fetching (using axios ar fetch ) data from API withPOST/PUT method
     }
     return;
   };
-  const increment = (id) => {
+  const increment = () => {
     if (!rated.current) {
       setCount(count + 1);
       rated.current = true;
-
-      //fetching (using axios ar fetch ) data from API withPOST/PUT method
     }
     return;
   };
